@@ -4,7 +4,7 @@ import pandas as pd
 
 # Load the trained model
 
-filename = "player_rating_predictor.pkl
+filename = 'C:/Users/user/OneDrive - Ashesi University/Desktop/ALL IN ONE/2ND YEAR, 2ND SEMESTER/Introduction to Artificial Intelligence/7. Week 9/Group8._SportsPrediction/player_rating_predictor.pkl'
 loaded_model = pickle.load(open(filename, 'rb'))
 
 # Define a function for predicting player ratings
