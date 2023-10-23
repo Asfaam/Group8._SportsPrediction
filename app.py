@@ -4,7 +4,8 @@ import pandas as pd
 
 # Load the trained model
 
-loaded_model = pickle.load(open('./player_rating_predictor.pkl', 'rb'))
+filename = 'C:/Users/user/OneDrive - Ashesi University/Desktop/ALL IN ONE/2ND YEAR, 2ND SEMESTER/Introduction to Artificial Intelligence/7. Week 9/AI_Final_MidSem_Project/player_rating_predictor.pkl'
+loaded_model = pickle.load(open(filename, 'rb'))
 
 # Define a function for predicting player ratings
 # In the predict_player_rating function, ensure the model is a RandomForestRegressor
