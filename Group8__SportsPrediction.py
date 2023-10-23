@@ -16,9 +16,6 @@ Original file is located at
 **Date:** *22nd October 2023*
 """
 
-from google.colab import drive
-drive.mount('/content/drive')
-
 # Import libraries
 import pickle
 import warnings
