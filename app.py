@@ -1,11 +1,10 @@
-import pickle
+import joblib
 import streamlit as st
 import pandas as pd
+import numpy as np
 
-# Load the trained model
-
-filename = '/content/drive/My Drive/Colab Notebooks/Intro to AI Folder/Mid-Semester Project/player_rating_predictor.pkl'
-loaded_model = pickle.load(open(filename, 'rb'))
+# Load the trained RandomForestRegressor model using joblib
+model = joblib.load('player_rating_predictor.joblib')
 
 # Define a function for predicting player ratings
 # In the predict_player_rating function, ensure the model is a RandomForestRegressor

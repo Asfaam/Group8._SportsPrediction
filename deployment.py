@@ -1,11 +1,11 @@
 # Import necessary libraries
-import pickle
+import joblib
 import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Load the trained RandomForestRegressor model
-model = pickle.load(open('player_rating_predictor.pkl', 'rb'))
+# Load the trained RandomForestRegressor model using joblib
+model = joblib.load('player_rating_predictor.joblib')
 
 # Create a Streamlit web app
 st.title("FIFA Player Rating Predictor")
