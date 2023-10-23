@@ -1,47 +1,35 @@
 import pickle
 import streamlit as st
-import numpy as np
+import pandas as pd
 
-# Load the trained RandomForestRegressor model
-model = pickle.load(open('player_rating_predictor.pkl', 'rb'))
+# Load the trained model
 
-# Function to predict the player's rating and calculate confidence
-def predict_rating(features):
-    features = np.array(features).reshape(1, -1)
-    prediction = model.predict(features)
-    
-    # Calculate confidence (standard deviation in this example)
-    confidence = np.std(model.predict(features))
-    
-    return prediction[0], confidence
+filename = "player_rating_predictor.pkl
+loaded_model = pickle.load(open(filename, 'rb'))
 
-# Streamlit app
+# Define a function for predicting player ratings
+# In the predict_player_rating function, ensure the model is a RandomForestRegressor
+def predict_player_rating(input_data):
+    if isinstance(loaded_model, RandomForestRegressor):
+        input_data = input_data.values.reshape(1, -1)
+        prediction = loaded_model.predict(input_data)
+        return prediction[0]
+    else:
+        st.error("Model is not a RandomForestRegressor")
+
+# Create a Streamlit web application
 st.title("FIFA Player Rating Predictor")
+st.write("Enter player information to predict their overall rating.")
 
-# Input fields for user to enter player attributes
-st.write("Enter Player Attributes:")
-features = []
+# Create input fields for user data
+features = ['movement_reactions', 'mentality_composure', 'passing', 'potential', 'release_clause_eur', 'dribbling', 'wage_eur', 'power_shot_power', 'value_eur', 'mentality_vision', 'attacking_short_passing']
+input_data = {}
+for feature in features:
+    input_data[feature] = st.number_input(f"Enter {feature}:", value=0)
 
-# Define input fields for relevant features from the dataset
-age = st.number_input("Age", min_value=16, max_value=45, value=20)
-features.append(age)
-
-overall = st.number_input("Overall Rating", min_value=40, max_value=100, value=70)
-features.append(overall)
-
-potential = st.number_input("Potential Rating", min_value=40, max_value=100, value=80)
-features.append(potential)
-
-value_eur = st.number_input("Value (in Euros)", min_value=0, value=500000)
-features.append(value_eur)
-
-wage_eur = st.number_input("Wage (in Euros)", min_value=0, value=5000)
-features.append(wage_eur)
-
-# Make prediction when the "Predict" button is clicked
+# Create a button to trigger the prediction
 if st.button("Predict Rating"):
-    prediction, confidence = predict_rating(features)
+    input_df = pd.DataFrame(input_data, index=[0])
+    prediction = predict_player_rating(input_df)
     st.write(f"Predicted Player Rating: {prediction:.2f}")
-    st.write(f"Confidence Score (Standard Deviation): {confidence:.2f}")
 
-st.write("Note: The model's prediction and confidence score may not be accurate for every player.")
